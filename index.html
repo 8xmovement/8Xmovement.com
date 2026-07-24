@@ -12,23 +12,28 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             background: radial-gradient(circle at center 70%, #2a2a2a 0%, #050505 100%);
             color: #fff;
             font-family: 'Rajdhani', sans-serif;
-            height: 100vh;
-            overflow: hidden; 
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+            overflow-x: hidden;
+            overflow-y: auto;
             display: flex;
             flex-direction: column;
+            padding-bottom: 90px; /* Space for sticky footer button */
         }
 
         /* Top Bar: Pill and Clock */
         .top-bar {
-            padding: 20px 40px;
+            padding: 20px 30px;
             display: flex;
             justify-content: flex-start;
+            width: 100%;
         }
 
         .status-pill {
@@ -37,22 +42,24 @@
             background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 40px;
-            padding: 5px 20px 5px 5px;
-            backdrop-filter: blur(5px);
+            padding: 6px 20px 6px 6px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
 
         .status-icon {
-            width: 40px;
-            height: 40px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             margin-right: 15px;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            flex-shrink: 0;
         }
 
-        /* Top Bar Logo Image Styling */
         .status-logo-img {
             width: 100%;
             height: 100%;
@@ -61,20 +68,22 @@
 
         .status-text {
             display: flex;
-            gap: 40px;
+            gap: 25px;
             align-items: center;
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
         }
 
         /* Members Row (Circular Avatars) */
         .members-container {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            padding: 20px;
+            align-items: center;
+            gap: 25px;
+            padding: 10px 20px;
             margin-top: 10px;
+            flex-wrap: wrap;
         }
 
         .member {
@@ -83,70 +92,75 @@
             align-items: center;
             text-decoration: none;
             color: #fff;
-            transition: transform 0.2s;
-            cursor: pointer; 
+            transition: transform 0.2s ease, opacity 0.2s ease;
+            cursor: pointer;
         }
 
         .member:hover {
-            transform: scale(1.1);
+            transform: translateY(-4px);
+        }
+
+        .member:active {
+            transform: scale(0.95);
         }
 
         .member-avatar {
-            width: 80px;
-            height: 80px;
+            width: 75px;
+            height: 75px;
             border-radius: 50%;
             background: linear-gradient(135deg, #555, #111);
             border: 2px solid rgba(255,255,255,0.8);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             object-fit: cover;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
         }
 
         .member-name {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             letter-spacing: 1px;
+            font-weight: 600;
         }
 
-        /* Clean Flat Divider */
+        /* Clean Divider */
         .divider {
-            width: 90%;
-            height: 4px;
-            margin: 10px auto 40px auto;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 2px;
+            width: 85%;
+            max-width: 900px;
+            height: 2px;
+            margin: 20px auto 35px auto;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
         }
 
-        /* Projects/Tracks Row */
+        /* Projects/Tracks Container */
         .projects-container {
             display: flex;
             justify-content: center;
-            gap: 40px;
-            padding: 0 40px;
-            transition: opacity 0.3s ease;
+            align-items: center;
+            gap: 30px;
+            padding: 0 20px;
+            flex-wrap: wrap;
         }
 
         /* Info Panel for Home Screen */
         .info-panel {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 12px;
-            padding: 20px 25px;
-            max-width: 400px;
-            backdrop-filter: blur(8px);
+            border-radius: 14px;
+            padding: 24px;
+            max-width: 380px;
+            width: 100%;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             color: #ddd;
-            font-size: 1rem;
+            font-size: 0.95rem;
             line-height: 1.5;
             letter-spacing: 1px;
             text-align: left;
             animation: fadeIn 0.4s ease-in-out;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            margin-right: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
         }
 
-        /* Home Info Logo Image Styling */
         .info-logo-img {
-            max-width: 140px;
+            max-width: 130px;
             height: auto;
             margin-bottom: 15px;
             object-fit: contain;
@@ -160,90 +174,159 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            gap: 10px;
             animation: fadeIn 0.4s ease-in-out;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
+            from { opacity: 0; transform: translateY(-8px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .project-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1rem;
-            margin-bottom: 10px;
+            font-size: 0.85rem;
             letter-spacing: 2px;
             text-transform: uppercase;
+            text-align: center;
         }
 
         .project-card {
-            width: 120px;
-            height: 120px;
+            width: 125px;
+            height: 125px;
             background: #000;
-            border-radius: 8px 8px 15px 15px; 
+            border-radius: 12px; 
             border: 2px solid #fff;
-            border-bottom: 6px solid #fff; 
+            border-bottom: 5px solid #fff; 
             position: relative;
             cursor: pointer;
-            transition: transform 0.3s;
-            -webkit-box-reflect: below 2px linear-gradient(transparent, transparent, rgba(0,0,0,0.6));
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: block; 
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
         }
 
         .project-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 25px rgba(255, 255, 255, 0.15);
+        }
+
+        .project-card:active {
+            transform: scale(0.96);
         }
 
         .project-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 6px 6px 0 0;
         }
 
         .project-code {
-            margin-top: 150px; 
             font-family: monospace;
             font-size: 0.75rem;
             letter-spacing: 2px;
-            color: #aaa;
+            color: #888;
         }
 
-        /* Footer / Navigation Details */
+        /* Floating Footer Controls */
         .footer-controls {
-            position: absolute;
-            bottom: 30px;
-            left: 40px;
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
             cursor: pointer;
-            transition: transform 0.2s;
+            padding: 8px 16px;
+            background: rgba(0, 0, 0, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.2s ease;
+            z-index: 100;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
         }
-        
+
         .footer-controls:hover {
-            transform: scale(1.05);
+            transform: scale(1.04);
+            background: rgba(0, 0, 0, 0.85);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .footer-controls:active {
+            transform: scale(0.95);
         }
 
         .btn-prompt {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
+            font-size: 0.9rem;
             font-style: italic;
             letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         .x-button {
-            width: 30px;
-            height: 30px;
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
-            background: #333;
+            background: #222;
             border: 1px solid #fff;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: Arial, sans-serif;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
             font-weight: bold;
             color: #fff;
+        }
+
+        /* Responsive Mobile Styles */
+        @media (max-width: 600px) {
+            .top-bar {
+                padding: 15px;
+            }
+
+            .status-pill {
+                padding: 4px 15px 4px 4px;
+            }
+
+            .status-text {
+                gap: 15px;
+                font-size: 0.8rem;
+            }
+
+            .members-container {
+                gap: 15px;
+                padding: 5px 10px;
+            }
+
+            .member-avatar {
+                width: 60px;
+                height: 60px;
+            }
+
+            .member-name {
+                font-size: 0.75rem;
+            }
+
+            .divider {
+                margin: 15px auto 25px auto;
+            }
+
+            .projects-container {
+                gap: 25px;
+            }
+
+            .info-panel {
+                padding: 18px;
+                font-size: 0.88rem;
+            }
+
+            .project-card {
+                width: 110px;
+                height: 110px;
+            }
         }
     </style>
 </head>
@@ -262,7 +345,7 @@
         </div>
     </div>
 
-    <!-- MEMBERS (Soundcloud Follows) -->
+    <!-- MEMBERS -->
     <div class="members-container">
         <div class="member" onclick="loadReleases('truleeko', 'truleeko')">
             <img src="https://images.genius.com/334f649ad315bdf4c62ec3bebf0a6b02.800x800x1.jpg" class="member-avatar" alt="Leek">
@@ -282,12 +365,12 @@
         </div>
     </div>
 
-    <!-- FLAT DIVIDER -->
+    <!-- DIVIDER -->
     <div class="divider"></div>
 
     <!-- PROJECTS / RELEASES -->
     <div class="projects-container" id="projects-container">
-        <!-- Content gets injected here by JavaScript -->
+        <!-- Content injected dynamically via JS -->
     </div>
 
     <!-- FOOTER CONTROLS -->
@@ -316,8 +399,6 @@
         updateClock(); 
 
         // --- 2. Dynamic Content Loading ---
-        
-        // Database of releases for each artist
         const releasesData = {
             home: [
                 { title: "8X MOVEMENT", image: "https://img.magnific.com/premium-vector/soundcloud-logo_578229-231.jpg?semt=ais_hybrid&w=740&q=80", code: "HOME-001", link: "https://soundcloud.com/8xmovement" }
@@ -338,18 +419,13 @@
             ]
         };
 
-        // Function to render the UI
         function loadReleases(artistKey, displayName) {
             const container = document.getElementById('projects-container');
             const currentViewLabel = document.getElementById('current-view');
             
-            // Change top bar text
             currentViewLabel.textContent = displayName;
-
-            // Clear current items
             container.innerHTML = '';
 
-            // Inject Custom Information Panel for 'Home' only
             if (artistKey === 'home') {
                 const infoPanel = document.createElement('div');
                 infoPanel.className = 'info-panel';
@@ -361,10 +437,8 @@
                 container.appendChild(infoPanel);
             }
 
-            // Get the data array for the clicked artist
             const data = releasesData[artistKey] || releasesData['home'];
 
-            // Loop through data and build HTML Cards
             data.forEach(item => {
                 const wrapper = document.createElement('div');
                 wrapper.className = 'project-card-wrapper';
@@ -381,7 +455,6 @@
             });
         }
 
-        // Load the 'Home' view by default when the page first opens
         window.onload = function() {
             loadReleases('home', 'Home');
         };
