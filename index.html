@@ -56,7 +56,7 @@
         .status-logo-img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
         }
 
         .status-text {
@@ -106,7 +106,7 @@
             letter-spacing: 1px;
         }
 
-        /* Clean Flat Divider (Glow Removed) */
+        /* Clean Flat Divider */
         .divider {
             width: 90%;
             height: 4px;
@@ -253,8 +253,7 @@
     <div class="top-bar">
         <div class="status-pill">
             <div class="status-icon">
-                <!-- LOGO PLACEHOLDER 1: TOP BAR -->
-                <img src="https://via.placeholder.com/80/ffffff/000000?text=LOGO" class="status-logo-img" alt="Logo">
+                <img src="8XLOGOWHITE.png" class="status-logo-img" alt="8X Logo">
             </div>
             <div class="status-text">
                 <span id="current-view">Home</span>
@@ -355,8 +354,7 @@
                 const infoPanel = document.createElement('div');
                 infoPanel.className = 'info-panel';
                 infoPanel.innerHTML = `
-                    <!-- LOGO PLACEHOLDER 2: HOME SCREEN HEADER -->
-                    <img src="https://via.placeholder.com/250x80/ffffff/000000?text=YOUR+LOGO+HERE" class="info-logo-img" alt="Logo">
+                    <img src="8XLOGOWHITE.png" class="info-logo-img" alt="8X Logo">
                     <p>8X is a versatile hip hop music collective founded by truleeko, 1kaj, rnnr9, reilocore, si6yon, and maruzen.</p>
                     <p style="color: #888; font-family: monospace; margin-top: 10px;">> CONNECTED_VIA_WEB <br>> EST. IN THE ETHER</p>
                 `;
